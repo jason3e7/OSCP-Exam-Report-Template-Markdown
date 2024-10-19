@@ -72,13 +72,13 @@ The threat hunt revealed the following high-level path the threat actor took to 
 
 The threat hunt revealed the following high-level path the threat actor took to compromise the Megacorp One environment: 
 
-1. Escalate Incident to Incident Response Team:
+- Escalate Incident to Incident Response Team:
   - Escalate the incident to the incident response team to conduct a thorough investigation of the identified compromises. The focus should be on assessing the full scope of the incident and understanding its impact on the organization's systems and data.
   - Collaborate closely with the incident response team to share findings, provide context, and support their efforts in containing and remediating the security incidents.
-2. Continued Support and Analysis:
+- Continued Support and Analysis:
   - Remain actively involved in supporting other defensive teams, particularly during the incident detection and identification phase of the incident management process.
   - Conduct further analysis of the malware samples to extract additional IoCs and behavioral patterns, providing valuable insights for ongoing threat detection and mitigation efforts.
-3. Continuous Improvement and Training:
+- Continuous Improvement and Training:
   - Implement policies to ensure that users do not reuse passwords across different accounts.
   - Develop and deploy detection rules to identify and prevent successful password attacks.
   - Add access control mechanisms to prevent unprivileged user accounts from accessing sensitive files.
