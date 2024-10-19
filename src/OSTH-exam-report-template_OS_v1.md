@@ -131,28 +131,14 @@ Based on the matching SHA-256 hash of the threat intelligence report and the cha
 
  Timestamp            | Observation | Affected Assets
 ----------------------|-------------|-----------------
-01/09/2024 3:25:00 PM | Beginning of Password\
-Spraying with Password\
-Password1! | Host: PC1
+01/09/2024 3:25:00 PM | Beginning of Password Spraying with Password Password1! | Host: PC1
 01/09/2024 3:58:00 PM | End of Password Spraying. | Host: PC1
-01/09/2024 3:58:15 PM | Successful login for local\
-Administrator user | Host: PC1\
-User: Administrator (local)
-01/09/2024 3:59:00 PM | Download of meterpreter.exe\
-from `<IP>` via Browser | Host: PC1\
-User: Administrator
-01/09/2024 3:59:49 PM | Process Creation of\
-meterpreter.exe | Host: PC1\
-User: Administrator (local)
-01/09/2024 4:05:11 PM | Process Creation of PsExec | Host: PC1\
-User: Administrator (local)\
-Target Machine: PC2\
-Target User: Administrator (local)\
-Password: Password1!"
+01/09/2024 3:58:15 PM | Successful login for local Administrator user | Host: PC1 User: Administrator (local)
+01/09/2024 3:59:00 PM | Download of meterpreter.exe from `<IP>` via Browser | Host: PC1 User: Administrator
+01/09/2024 3:59:49 PM | Process Creation of meterpreter.exe | Host: PC1 User: Administrator (local)
+01/09/2024 4:05:11 PM | Process Creation of PsExec | Host: PC1 User: Administrator (local) Target Machine: PC2 Target User: Administrator (local) Password: Password1!"
 ... | ... | ...
-01/11/2024 1:11:11 AM | Process Creation of\
-Zwetsch.exe | Host: PC2\
-User: Administrator (local)
+01/11/2024 1:11:11 AM | Process Creation of Zwetsch.exe | Host: PC2 User: Administrator (local)
 ... | ... | ...
 
 
