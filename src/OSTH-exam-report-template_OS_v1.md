@@ -7,9 +7,9 @@ keywords: [Markdown, Example]
 subtitle: "OSTH Exam Report"
 lang: "en"
 titlepage: true
-titlepage-color: "DC143C"
-titlepage-text-color: "FFFFFF"
-titlepage-rule-color: "FFFFFF"
+titlepage-color: "483D8B"
+titlepage-text-color: "FFFAFA"
+titlepage-rule-color: "FFFAFA"
 titlepage-rule-height: 2
 book: true
 classoption: oneside
