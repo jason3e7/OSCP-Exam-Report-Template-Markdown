@@ -156,6 +156,11 @@ Security Operations:
 - **OSDA**
   - [Official Offensive Security Template v1](output/examples/OSDA-exam-report-template_OS_v1.pdf)
 
+Threat Hunting:
+
+- **OSTH**
+  - [Official Offensive Security Template v1]()
+
 [whoisflynn]:https://github.com/whoisflynn
 [noraj]:https://github.com/noraj
 [epi]:https://github.com/epi052
@@ -176,6 +181,7 @@ Exam acronym | Exam name                                         | Lab acronym |
 **OSEE**     | Offensive Security Exploitation Expert            | AWE         | Advanced Windows Exploitation              | EXP-401
 **OSCE**     | Offensive Security Certified Expert               | CTP         | Cracking the Perimeter                     | N/A
 **OSDA**     | Offensive Security Defense Analyst                | SODA        | Security Operations and Defensive Analysis | SOC-200
+**OSTH**     | Offensive Security Threat Hunting                 |             | Threat Hunting                             | TH-200
 
 ## Community projects
 
