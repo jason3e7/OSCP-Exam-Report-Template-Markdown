@@ -1,6 +1,6 @@
 ---
 title: "Offensive Security Threat Hunter Exam Report"
-author: ["student@youremailaddress.com", "OSID: XXXX"]
+author: ["student@youremailaddress.com", "OSID: XXXXX"]
 date: "2024-10-19"
 subject: "Markdown"
 keywords: [Markdown, Example]
@@ -15,7 +15,7 @@ book: true
 classoption: oneside
 code-block-font-size: \scriptsize
 ---
-# Offensive Security OSTH Exam Report
+# Offensive Security Threat Hunter Exam Report
 
 ## Introduction
 
@@ -83,6 +83,8 @@ The threat hunt revealed the following high-level path the threat actor took to 
   - Develop and deploy detection rules to identify and prevent successful password attacks.
   - Add access control mechanisms to prevent unprivileged user accounts from accessing sensitive files.
   - Implement security awareness training for all users, emphasizing strong password usage and best practices.
+
+# Methodology
 
 For the scheduled threat hunting sprint, we utilized the following tools, scripts, commands, and resources:
 
@@ -157,6 +159,7 @@ For comprehensive guidance on potential remediation steps and enhancing detectio
 Attached is a compiled list of the resulting  IOCs found during the threat hunting sprint.
 
 **File Hashes**
+
 File Name       | SHA256
 ----------------|------------------------------------------------------------------
 Zwetsch.exe     | 4ED877F6F154EB6EBB02EE44E4D836C28193D9254A4A3D6AF6236D8F5BAB88D2
@@ -164,6 +167,7 @@ meterpreter.exe | DF99BBABE7BD0E7A1D96CF370B78FDCF250AF380065A3D51F57EDE6A571E2C
 ...             | ...
 
 **Network Communications**
+
 Type           | Value
 ---------------|----------------------------------------
 C&C            | 192.168.1.1:9999 (meterpreter.exe)
