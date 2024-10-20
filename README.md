@@ -5,7 +5,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/noraj/OSCP-Exam-Report-Template-Markdown?style=flat-square)](https://github.com/noraj/OSCP-Exam-Report-Template-Markdown/network)
 [![GitHub license](https://img.shields.io/github/license/noraj/OSCP-Exam-Report-Template-Markdown?style=flat-square)](https://github.com/noraj/OSCP-Exam-Report-Template-Markdown/blob/master/LICENSE)
 
-I created an **Offensive Security Exam Report Template in Markdown** so LaTeX, Microsoft Office Word, LibreOffice Writer are no longer needed during your Offensive Security OSCP, OSWE, OSEE, OSWP, OSEP, OSED, OSWA, OSDA, OSMR exam!
+I created an **Offensive Security Exam Report Template in Markdown** so LaTeX, Microsoft Office Word, LibreOffice Writer are no longer needed during your Offensive Security OSCP, OSWE, OSEE, OSWP, OSEP, OSED, OSWA, OSDA, OSMR, OSTH exam!
 
 Now you can be efficient and faster during your exam report redaction!
 
@@ -236,6 +236,8 @@ Report Templates:
   - [Official Offensive Security Template](https://help.offensive-security.com/hc/en-us/articles/4410105675412-OSDA-Exam-Guide#h_01GGD1AKE9DRDAJZ91PXZ5X0PN) (UNLICENSED)
 - **OSMR**
   - [Official Offensive Security Template](https://help.offensive-security.com/hc/en-us/articles/4411107766804-OSMR-Exam-Guide#OSMRExamGuide-SuggestedDocumentationTemplates) (UNLICENSED)
+- **OSTH**
+  - [Official Offensive Security Template](https://help.offsec.com/hc/en-us/articles/29141776768148-OSTH-Exam-Guide-Newly-Updated#h_01J971XAJKYDA6GX24S4XVSBAK) (UNLICENSED)
 
 Pandoc Template:
 
