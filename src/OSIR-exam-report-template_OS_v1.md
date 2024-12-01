@@ -112,8 +112,10 @@ Once the compromise of PC1, PC2, and SRV1 was confirmed, immediate containment m
 The affected machines were isolated from the network to prevent further lateral movement and to cut off communication with the attacker’s command and control (C&C) infrastructure.
 
 The eradication phase began with a thorough audit of all local Administrator accounts across the environment to ensure that passwords were unique and secure.
-The shared local Administrator password between PC1 and PC2 was replaced with new, secure passwords on both machines. Other systems using the same original password were identified and remediated as well.
-User accounts that had cached credentials on PC2, likely extracted by the attacker using Mimikatz, were reset. Clean backups were restored to PC1, PC2, and SRV1 to remove any residual threats, and their local Administrator account passwords were updated.
+The shared local Administrator password between PC1 and PC2 was replaced with new, secure passwords on both machines.
+Other systems using the same original password were identified and remediated as well.
+User accounts that had cached credentials on PC2, likely extracted by the attacker using Mimikatz, were reset.
+Clean backups were restored to PC1, PC2, and SRV1 to remove any residual threats, and their local Administrator account passwords were updated.
 To further strengthen security, all local Administrator and user account passwords were reset, and a strong password policy, alongside account lockout mechanisms, was enforced to prevent future password attacks.
 
 ## Findings
@@ -134,19 +136,15 @@ Timestamp             | Observation | Affected Assets
 
 ## Disk Image Analysis
 
-We began the analysis of the provided disk image by loading it in Autopsy and enabling the plugin “Recent Activities”.
-Once the analysis of the disk image is finished, we’ll have several options to start our investigation.
+We began the analysis of the provided disk image by loading it in Autopsy and enabling the plugin “Recent Activities”. Once the analysis of the disk image is finished, we’ll have several options to start our investigation.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-Based on the information that were shared by the other incident response team, a download has been recorded.
-Therefore, let’s begin by analyzing the “Web Downloads” under “Data Artifacts”.
-One entry catches our attention which states that offer.7z was downloaded from 192.168.48.130:8000.
+Based on the information that were shared by the other incident response team, a download has been recorded. Therefore, let’s begin by analyzing the “Web Downloads” under “Data Artifacts”. One entry catches our attention which states that offer.7z was downloaded from 192.168.48.130:8000.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-Let’s check if this archive exists in the Downloads directory of the Admin user where it was downloaded to.
-If yes,let’s try to extract it.
+Let’s check if this archive exists in the Downloads directory of the Admin user where it was downloaded to. If yes,let’s try to extract it.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
@@ -154,22 +152,49 @@ Unfortunately, we get prompted for a password. Since we don’t have a password,
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-At this point, let’s think about how we could obtain such a password.
-One possibility is to assume that the attacker had only access via CLI and therefore might have used PowerShell to extract the archive.
-In addition, based on the information from the system we know that PowerShell Script Block Logging is enabled.
-Let’s check out the PowerShell Operational Log in Event Viewer and search for “offer.7z”.
+At this point, let’s think about how we could obtain such a password. One possibility is to assume that the attacker had only access via CLI and therefore might have used PowerShell to extract the archive. In addition, based on the information from the system we know that PowerShell Script Block Logging is enabled. Let’s check out the PowerShell Operational Log in Event Viewer and search for “offer.7z”.
 
 This reveals the following event:
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-The event contains the information that the password superpass was used to extract the archive.
-Let’s try this password and extract the files by using 7z. Once the archive is extracted, a new binary appears named “viruz.exe”.
-The lab asks for the file hash of this binary which we can get via the Cmdlet Get-FileHash: 2D51EF5F421E844EC1278CDAAA1830105D1F879A163AF55EA826B428A0A97E68.
+The event contains the information that the password superpass was used to extract the archive. Let’s try this password and extract the files by using 7z. Once the archive is extracted, a new binary appears named “viruz.exe”. The lab asks for the file hash of this binary which we can get via the Cmdlet Get-FileHash: 2D51EF5F421E844EC1278CDAAA1830105D1F879A163AF55EA826B428A0A97E68.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
 ## Malware Analysis
+
+The second lab of the Forensic Analysis phase asks to analyze the binary from the previous lab and obtain a token that is used by the threat actor for authenticating to their C&C infrastructure. Let’s start by starting an administrative PowerShell session.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Then, let’s navigate to the correct directory and execute the binary.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+The binary returns the information that a token is missing. At this point, we can either use static or dynamic analysis. We’ll use dynamic analysis using ProcMon and start by adding a filter for viruz.exe.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Once we rerun the binary, we’ll see the following entries in ProcMon. One entry shows a “NAME NOT FOUND” Result for the file C:\Windows\token.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Using the Cmdlet Test-Path, let’s check if the file exists:
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+As expected the file doesn’t exist. To resolve this issue, let’s create this file as empty file with the Cmdlet New-Item.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Once done, let’s rerun the binary.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Now, the binary returns the information “Waiting for token…” instead of the previous error. In addition, it doesn’t terminate itself but waits presumably for input of a token of some kind. Let’s clear the ProcMon screen and rerun the binary to see what the binary is doing.
+
+[…]
 
 # Conclusion
 
