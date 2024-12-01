@@ -20,7 +20,7 @@ code-block-font-size: \scriptsize
 ## Introduction
 
 The OffSec Incident Responder exam report contains all efforts that were conducted in order to pass the OffSec certification examination.
-This report should contain all items that were used to pass the exam and it will be graded from a standpoint of correctness and fullness to all aspects of the exam. 
+This report should contain all items that were used to pass the exam and it will be graded from a standpoint of correctness and fullness to all aspects of the exam.
 The purpose of this report is to ensure that the student has a full understanding of incident response methodologies as well as the technical knowledge to pass the qualifications for the OffSec Incident Responder.
 
 ## Objective
@@ -38,7 +38,7 @@ Use the sample report as a guideline to get you through the reporting.
 The student will be required to fill out this incident response report fully and to include the following sections:
 
 - Executive Summary (All sections)
-- Incident Detection and Identification 
+- Incident Detection and Identification
     - In this section, provide a detailed, story-style walkthrough of Phase 1. Focus on how you identified the answer to each exercise question, and ensure you include the exact Splunk query used in your investigation.
 - Incident Detection and Identification - Containment, Eradication, and Recovery
     - In this section, outline the key steps that can be taken to contain and recover compromised systems, as well as eliminate the threat identified in Phase 1. Focus on actions that mitigate the immediate risk, restore system integrity, and remove any remaining traces of the compromise.
@@ -56,7 +56,7 @@ The walkthroughs in the **Incident Detection and Identification**, **Disk Image 
 
 ## Incident Detection and Identification Overview
 
-The SOC team escalated several triggered alerts to the Incident Response team for investigation. 
+The SOC team escalated several triggered alerts to the Incident Response team for investigation.
 The primary objectives were to identify if the triggered alerts contained compromised systems and assess the impact of the attacker’s actions, such as determining whether data has been exfiltrated or encrypted.
 
 While investigating the alerts and the recorded data of the incident, we identified three compromised systems in the Megacorp One environment:
@@ -71,16 +71,16 @@ The threat actor accessed and exfiltrated the secret recipe for our chocolate mu
 
 Our investigation revealed the following high-level path the threat actor took to compromise the Megacorp One environment and accessed the sensitive recipe:
 
-1. PC1 was used as the initial entry vector by the threat actor by trying numerous passwords against several user accounts. The threat actor finally succeeded and got access to this machine with administrative privileges. 
+1. PC1 was used as the initial entry vector by the threat actor by trying numerous passwords against several user accounts. The threat actor finally succeeded and got access to this machine with administrative privileges.
 2. PC2 was configured to use the same password for the local administrator account and the threat actor used it to get access to it. On the machine, the attacker obtained credentials from logged on users by using Mimikatz.
-3. SRV1 was accessed using one of the obtained sets of credentials from PC2. The threat actor accessed and exfiltrated the secret chocolate muffin recipe from this machine. 
+3. SRV1 was accessed using one of the obtained sets of credentials from PC2. The threat actor accessed and exfiltrated the secret chocolate muffin recipe from this machine.
 
 ## Forensic Analysis Overview
 
-A disk image was created from a compromised machine in another branch of the Megacorp One enterprise. 
+A disk image was created from a compromised machine in another branch of the Megacorp One enterprise.
 Analysis of this disk image confirmed that it had been compromised by a threat actor, who had downloaded a password-protected archive containing a malicious binary.
 
-Upon analyzing the binary, we found that it checks whether the system is in a specific state before executing actions to generate a token. 
+Upon analyzing the binary, we found that it checks whether the system is in a specific state before executing actions to generate a token.
 By leveraging this token, we were able to obtain an authentication token for the threat actor’s Command & Control (C&C) infrastructure, which provided valuable insights into their operations and helped strengthen our security.
 
 # Incident Detection and Identification
@@ -133,6 +133,10 @@ Timestamp             | Observation | Affected Assets
 # Forensic Analysis
 
 ## Disk Image Analysis
+
+We began the analysis of the provided disk image by loading it in Autopsy and enabling the plugin “Recent Activities”.
+Once the analysis of the disk image is finished, we’ll have several options to start our investigation. 
+
 
 ## Malware Analysis
 
