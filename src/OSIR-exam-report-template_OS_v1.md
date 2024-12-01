@@ -85,51 +85,36 @@ By leveraging this token, we were able to obtain an authentication token for the
 
 # Incident Detection and Identification
 
-For the scheduled threat hunting sprint, we utilized the following tools, scripts, commands, and resources:
-
-- Splunk
-- WAG Threat Intelligence Report
-- PowerShell on DEV (Deobfuscation)
-
-We performed an intelligence-based threat hunting sprint based on the information provided in the WAG threat intelligence report. This approach led us to detect the usage of Mimikatz on PC2, which revealed several additional indicators for further investigation. By analyzing these indicators, we were able to identify lateral movement to PC3 by correlating login and Sysmon events in Splunk with the known tools and techniques categorized under the "Lateral Movement" column. Through this analysis, we also discovered that after compromising PC3, the attacker exfiltrated a sensitive document.
-
-After exhausting our list of IoCs and other information from the intelligence-based phase, we transitioned to hypothesis-based threat hunting. This shift provided us with the flexibility to investigate how PC2 was accessed and how the perimeter was breached, considering that this is not a publicly accessible machine.
-
-Our hunting hypothesis was:
-
-We suspect that PC3 and PC2 are not the only systems compromised by the WAG threat actor. While we couldn’t identify any further indicators that revealed additional compromised systems using the credentials obtained from PC2, or following the compromise of PC3, it is likely that PC2 was not the initial system compromised by WAG, given that it is not externally accessible. Therefore, we suspect that at least one other machine is compromised. We will validate this by investigating the events preceding the use of Mimikatz to obtain credentials and by identifying the vector the threat actor used to access PC2 and breach the perimeter.
-
-# Hunt Narrative
-
-The threat intelligence report covering TTPs of the threat actor We Are Garfield provided a list of IoCs including SHA-256 hashes. We used the following query in Splunk to hunt for these hashes:
-
-```default
-index="*" ("EEAAFA68236BD1629E36E81C5A8EC2CE8804C9798B5C84FEE55F6128CCBA8FB0" OR
-"4ED877F6F154EB6EBB02EE44E4D836C28193D9254A4A3D6AF6236D8F5BAB88D2" OR
-"11EBBAA2EDA3CCD4B7F1BB2C09AC7DCA0CD1F4B71B7E0CFCEDE36861E23DA034" OR
-"8507FFC7EA1953F66D8441180C281D456889F93CF3F6CBB01F368886F9D8C097"
-```
-
-This search query resulted in only a single event with the timestamp 01/11/2024 1:11:11 AM:
+The SOC team escalated several triggered alerts to the Incident Response team as shown in the following screenshot.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-The matching SHA-256 hash is referred to as “Mimikatz” in the threat intelligence report. We then reviewed the event in more detail.
+One of the escalated alerts is named “Malicious Apps” and monitors the collected events for occurrences of SHA-256 hashes of known malicious applications that are commonly used by threat actors such as Mimikatz and NetExec.
+The alert triggered only one time for an event recorded at 01/11/2024 1:11:11 AM.
+
+Since events containing information about the usage of applications that are commonly used by attackers may have severe implications, let’s review this event in more detail.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-The event provides us several important information that can be leveraged in our hunt:
+The event provides us several important information that can be leveraged in our incident detection and identification process:
 
 - Username: Administrator
 - Filename: Zwetsch.exe
 - Directory: `C:\hackingtools\`
 
-Based on the matching SHA-256 hash of the threat intelligence report and the characteristic commandline argument “sekurlsa::logonpasswords”, we can be certain that this is Mimikatz.
+Based on the matching SHA-256 hash and the characteristic commandline argument “sekurlsa::logonpasswords”, we can be certain that this is Mimikatz.
 
 […]
 
 ## Containment, Eradication, and Recovery
 
+Once the compromise of PC1, PC2, and SRV1 was confirmed, immediate containment measures were implemented.
+The affected machines were isolated from the network to prevent further lateral movement and to cut off communication with the attacker’s command and control (C&C) infrastructure.
+
+The eradication phase began with a thorough audit of all local Administrator accounts across the environment to ensure that passwords were unique and secure.
+The shared local Administrator password between PC1 and PC2 was replaced with new, secure passwords on both machines. Other systems using the same original password were identified and remediated as well.
+User accounts that had cached credentials on PC2, likely extracted by the attacker using Mimikatz, were reset. Clean backups were restored to PC1, PC2, and SRV1 to remove any residual threats, and their local Administrator account passwords were updated.
+To further strengthen security, all local Administrator and user account passwords were reset, and a strong password policy, alongside account lockout mechanisms, was enforced to prevent future password attacks.
 
 ## Findings
 
@@ -144,7 +129,6 @@ Timestamp             | Observation | Affected Assets
 […] | […] | […]
 01/11/2024 1:11:11 AM | Process Creation of Zwetsch.exe | Host: PC2 User: Administrator (local)
 […] | […]| […]
-
 
 # Forensic Analysis
 
