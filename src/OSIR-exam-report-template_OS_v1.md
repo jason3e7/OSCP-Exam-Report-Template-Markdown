@@ -135,8 +135,39 @@ Timestamp             | Observation | Affected Assets
 ## Disk Image Analysis
 
 We began the analysis of the provided disk image by loading it in Autopsy and enabling the plugin “Recent Activities”.
-Once the analysis of the disk image is finished, we’ll have several options to start our investigation. 
+Once the analysis of the disk image is finished, we’ll have several options to start our investigation.
 
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Based on the information that were shared by the other incident response team, a download has been recorded.
+Therefore, let’s begin by analyzing the “Web Downloads” under “Data Artifacts”.
+One entry catches our attention which states that offer.7z was downloaded from 192.168.48.130:8000.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Let’s check if this archive exists in the Downloads directory of the Admin user where it was downloaded to.
+If yes,let’s try to extract it.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+Unfortunately, we get prompted for a password. Since we don’t have a password, our extraction attempt fails.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+At this point, let’s think about how we could obtain such a password.
+One possibility is to assume that the attacker had only access via CLI and therefore might have used PowerShell to extract the archive.
+In addition, based on the information from the system we know that PowerShell Script Block Logging is enabled.
+Let’s check out the PowerShell Operational Log in Event Viewer and search for “offer.7z”.
+
+This reveals the following event:
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
+
+The event contains the information that the password superpass was used to extract the archive.
+Let’s try this password and extract the files by using 7z. Once the archive is extracted, a new binary appears named “viruz.exe”.
+The lab asks for the file hash of this binary which we can get via the Cmdlet Get-FileHash: 2D51EF5F421E844EC1278CDAAA1830105D1F879A163AF55EA826B428A0A97E68.
+
+![ImgPlaceholder](img/placeholder-image-300x225.png)
 
 ## Malware Analysis
 
