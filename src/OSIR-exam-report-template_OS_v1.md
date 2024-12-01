@@ -4,7 +4,7 @@ author: ["student@youremailaddress.com", "OSID: XXXXX"]
 date: "2024-12-01"
 subject: "Markdown"
 keywords: [Markdown, Example]
-subtitle: "OSTH Exam Report"
+subtitle: "OSIR Exam Report"
 lang: "en"
 titlepage: true
 titlepage-color: "483D8B"
