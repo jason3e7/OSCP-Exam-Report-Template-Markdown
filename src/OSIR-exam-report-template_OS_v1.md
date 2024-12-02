@@ -7,7 +7,7 @@ keywords: [Markdown, Example]
 subtitle: "OSIR Exam Report"
 lang: "en"
 titlepage: true
-titlepage-color: "483D8B"
+titlepage-color: "108062"
 titlepage-text-color: "FFFAFA"
 titlepage-rule-color: "FFFAFA"
 titlepage-rule-height: 2
