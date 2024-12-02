@@ -30,6 +30,7 @@ The objective in the first phase is to identify all compromised systems and dete
 Phase 2 involves performing a forensic analysis on a disk image provided by a colleague from another branch of the Megacorp One's Incident Response team.
 Based on their initial analysis, the disk image contains a post-exploitation framework binary that contains an encryption key.
 You must find the binary and obtain the encryption key.
+
 Example pages have already been created for you at the latter portions of this document that should demonstrate the amount of information and detail that is expected in the exam report.
 Use the sample report as a guideline to get you through the reporting.
 
@@ -176,7 +177,7 @@ The binary returns the information that a token is missing. At this point, we ca
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
-Once we rerun the binary, we’ll see the following entries in ProcMon. One entry shows a “NAME NOT FOUND” Result for the file C:\Windows\token.
+Once we rerun the binary, we’ll see the following entries in ProcMon. One entry shows a “NAME NOT FOUND” Result for the file `C:\Windows\token`.
 
 ![ImgPlaceholder](img/placeholder-image-300x225.png)
 
